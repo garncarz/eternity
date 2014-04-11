@@ -1,0 +1,282 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+
+\usetheme{Dresden}
+
+\title[Eternity~II]{Algoritmy pro řešení hlavolamu Eternity~II}
+\author{Ondřej Garncarz}
+\institute[VŠB-TUO]{Vysoká škola Báňská --- Technická univerzita Ostrava}
+\date{2009}
+
+\begin{document}
+
+
+\frame{\titlepage}
+
+
+\section{Úvod}
+
+\begin{frame}
+\frametitle{Úvod}
+
+\begin{columns}
+
+\column{0.65\textwidth}
+\begin{itemize}
+\item Soutěžní puzzle
+\begin{itemize}
+\item Autor: Christopher Monckton
+\item Vydavatel: TOMY UK Ltd.
+\item Výhra: 2 000 000 \$
+\end{itemize}
+\item Jednoduchá pravidla: stejné symboly k~sobě, šedá na okraj
+\item NP-úplný problém
+\end{itemize}
+
+\centering
+\includegraphics[width=0.2\textwidth]{jeden-dilek.png}
+
+\column{0.35\textwidth}
+\includegraphics[width=\textwidth]{6x6x6.png}
+
+\end{columns}
+
+\end{frame}
+
+
+\section{Backtracking}
+
+\begin{frame}
+\frametitle{Backtracking}
+
+\begin{itemize}
+
+\item Lidské fungování:
+\begin{itemize}
+\item Na dané pozici zkouší všechny možné dílky
+\item Pak přesun na další pozici
+\item Vracení se v~případě neúspěchu
+\end{itemize}
+
+\item Možnost nastavit pořadí pozic na ploše
+
+\item Modifikace:
+\begin{itemize}
+\item Náhodné pořádí dílků při vybírání na dané pozici
+\item Netrpělivost --- po určité době restart
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Výsledky pro backtracking}
+
+\begin{frame}
+\frametitle{Výsledky pro backtracking}
+\centering
+
+\begin{block}{}
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Plocha} & \textbf{Čas [hod:min:sek]} \\
+\hline
+$6 \times 6 \times 6$ & 0:00:00 \\
+$8 \times 8 \times 8$ & 0:00:23 \\
+$9 \times 9 \times 9$ & 1:00:32 \\
+$10 \times 10 \times 10$ & $>$~den \\
+\hline
+\end{tabular}
+\end{block}
+
+\begin{block}{}
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Plocha} & \textbf{Způsob procházení} & \textbf{Čas [hod:min:sek]} \\
+\hline
+$8 \times 8 \times 8$ & řádkový & 0:00:04 \\
+$8 \times 8 \times 8$ & spirálovitý & 0:00:03 \\
+$9 \times 9 \times 9$ & řádkový & 0:22:36 \\
+$9 \times 9 \times 9$ & spirálovitý & 0:04:04 \\
+\hline
+\end{tabular}
+\end{block}
+
+\end{frame}
+
+
+\section{Genetické algoritmy}
+
+\begin{frame}
+\frametitle{Genetické algoritmy}
+
+\begin{itemize}
+\item Simulují evoluční proces
+\item Jednotlivec --- plocha
+\item Populace --- více možností nastavení plochy
+\item Start: náhodné plochy
+\item Selekcí, křížením a~mutací k~lepší nové generaci
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Jiná varianta}
+
+\begin{frame}
+\frametitle{Genetické algoritmy, jiná varianta}
+
+\begin{itemize}
+\item Jednotlivec --- dílek plochy
+\item Populace --- plocha
+\item Start: náhodná plocha (splňující pravidla)
+\item Dochází pouze ke zlepšování dílků uvnitř plochy, ne úplně genetický algoritmus
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Výsledky}
+
+\begin{frame}
+\frametitle{Výsledky pro genetické algoritmy}
+
+\begin{block}{První varianta}
+Nedosáhne nikdy úplného cíle.
+\end{block}
+
+\begin{block}{Druhá varianta}
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Plocha} & \textbf{Čas [hod:min:sek]} \\
+\hline
+$3 \times 3 \times 3$ & 0:00:00 \\
+$4 \times 4 \times 4$ & 0:00:09 \\
+$5 \times 5 \times 5$ & 0:40:35--2:16:42 \\
+$6 \times 6 \times 6$ & $>$~den \\
+\hline
+\end{tabular}
+\end{block}
+
+\end{frame}
+
+
+\section{Simulated Annealing}
+
+\begin{frame}
+\frametitle{Simulated Annealing}
+
+\begin{itemize}
+\item Simuluje žíhání oceli
+\item Ocel --- plocha
+\item Podobné jako druhá varianta genetických algoritmů
+\item Start: rozházená plocha zadání
+\item Kroky: přiblížení se cílové ploše pomocí rotací a~prohazování dílků
+\item Vzdoruje uváznutí v~lokálním optimu 
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Výsledky}
+
+\begin{frame}
+\frametitle{Výsledky pro Simulated Annealing}
+
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Plocha} & \textbf{Čas [hod:min:sek]} \\
+\hline
+$3 \times 3 \times 3$ & 0:00:06 \\
+$4 \times 4 \times 4$ & 0:02:31--0:03:06 \\
+$5 \times 5 \times 5$ & $>$~den \\
+\hline
+\end{tabular}
+
+\end{frame}
+
+
+\section{SAT}
+
+\begin{frame}
+\frametitle{SAT}
+
+\begin{itemize}
+\item Pouze přepis problému do logické formule
+\item boolean SATisfiability problem
+\item Využití externích SAT solverů k~řešení:
+\begin{itemize}
+\item Simplify
+\item MiniSat
+\item Spear
+\item zChaff
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Výsledky}
+
+\begin{frame}
+\frametitle{Výsledky pro SAT}
+
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Plocha} & \textbf{SAT solver (program)} & \textbf{Čas [hod:min:sek]} \\
+\hline
+$3 \times 3 \times 3$ & Simplify & 0:00:18 \\
+$3 \times 3 \times 3$ & MiniSat, Spear, zChaff & 0:00:01 \\
+$4 \times 4 \times 4$ & Simplify & $>$ 4:08:59 \\
+$4 \times 4 \times 4$ & MiniSat, Spear, zChaff & 0:00:01 \\
+$5 \times 5 \times 5$ & MiniSat & 0:00:17 \\
+$5 \times 5 \times 5$ & Spear & 0:00:45 \\
+$5 \times 5 \times 5$ & zChaff & 0:09:45 \\
+$6 \times 6 \times 6$ & MiniSat & 4:25:11 \\
+$6 \times 6 \times 6$ & Spear, zChaff & $>$ 4:00:00 \\
+$7 \times 7 \times 7$ & MiniSat & $>$~den \\
+\hline
+\end{tabular}
+
+\end{frame}
+
+
+\section{Shrnutí výsledků}
+
+\begin{frame}
+\frametitle{Shrnutí výsledků}
+
+Řešení do 24~hodin: \vskip 0.5cm
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Algoritmus} & \textbf{Velikost plochy} \\
+\hline
+backtracking & $9 \times 9 \times 9$ \\
+SAT & $6 \times 6 \times 6$ \\
+pseudoGA & $5 \times 5 \times 5$ \\
+Simulated Annealing & $4 \times 4 \times 4$ \\
+GA & --- \\
+\hline
+\end{tabular}
+
+\end{frame}
+
+
+\section*{}
+
+\begin{frame}
+\centering
+Konec\\
+\end{frame}
+
+
+\end{document}

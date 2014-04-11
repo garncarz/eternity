@@ -1,0 +1,16 @@
+table {
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+caption {
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: gray;
+}
+
+td, th {
+  border: gray 2px solid;
+  padding-right: 10px;
+}
+

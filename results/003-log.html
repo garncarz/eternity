@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Eternity log #3</title>
+<link rel="stylesheet" href="style.css" media="all" />
+</head>
+
+<body>
+
+<h1>Eternity log #3</h1>
+
+
+<table>
+<tr><td><b>Datum:</b></td><td>10. - 14. 12. 2008</td></tr>
+<tr>
+<td><b>Hrací plocha:</b></td>
+<td>
+4&times;4&times;4 <a href="files/003-area.area">vstup</a> <a href="files/003-area_orig.area">originál</a>
+</td>
+</tr>
+<tr><td><b>Stroj:</b></td><td>AMD Athlon 64 X2 (1.58 GHz / 797 MHz - ?) 1.00 GB RAM Windows XP/Cygwin</td></tr>
+<tr><td><b>Popis:</b></td>
+<td>
+Porovnání různých způsobů výpočtu teploty oceli při Simulated annealing.<br />
+<code>double Annealing::temperature(unsigned long long step) { ... }</code><br />
+&gt; - čas větší než... - nedokončeno
+</td>
+</tr>
+</table>
+
+
+<table>
+
+<caption>Výsledky</caption>
+
+<tr>
+<th>Výpočet</th>
+<th colspan="4">Časy</th>
+</tr>
+
+<tr>
+<td><code>return 100000 / (double)(step % 100000 + 1);</code></td>
+<td>4:02</td>
+<td>1:31</td>
+<td>0:25</td>
+<td>3:24</td>
+</tr>
+
+<tr>
+<td><code>return 1000 / (double)(step % 1000 + 1);</code></td>
+<td>&gt;9:40</td>
+<td>&gt;8:06</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)(step % 10000000 + 1);</code></td>
+<td>0:25</td>
+<td>1:02</td>
+<td>1:03</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 50000000 / (double)(step % 50000000 + 1);</code></td>
+<td>2:19</td>
+<td>2:31</td>
+<td>2:32</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step * 2) % 10000000 + 1);</code></td>
+<td>8:51</td>
+<td>0:31</td>
+<td>0:32</td>
+<td>4:42</td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step * 4) % 10000000 + 1);</code></td>
+<td>3:45</td>
+<td>1:08</td>
+<td>0:46</td>
+<td>3:24</td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step * 8) % 10000000 + 1);</code></td>
+<td>4:18</td>
+<td>1:57</td>
+<td>2:41</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step / 2) % 10000000 + 1);</code></td>
+<td>0:53</td>
+<td>0:55</td>
+<td>2:03</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step / 4) % 10000000 + 1);</code></td>
+<td>2:00</td>
+<td>1:55</td>
+<td>2:06</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step / 8) % 10000000 + 1);</code></td>
+<td>3:54</td>
+<td>3:41</td>
+<td>4:09</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((step * step) % 10000000 + 1);</code></td>
+<td>&gt;30:04</td>
+<td>&gt;23:07</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((int)sqrt(step) % 10000000 + 1);</code></td>
+<td>&gt;24:52</td>
+<td>&gt;2:30:24</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((int)log(step) % 10000000 + 1);</code></td>
+<td>&gt;7:19</td>
+<td>&gt;21:11</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 - (step % (10000000 / 100)) * 100;</code></td>
+<td>&gt;10:44</td>
+<td>&gt;10:10</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 - (step % (10000000 / 10000)) * 10000;</code></td>
+<td>&gt;7:35</td>
+<td>&gt;10:22</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 1000000000 - (step % (1000000000 / 10)) * 10;</code></td>
+<td>&gt;7:36</td>
+<td>&gt;31:56</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 - step % 10000000;</code></td>
+<td>&gt;10:48</td>
+<td>&gt;5:40</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((int)sqrt(step * 6) % 10000000 + 1);</code></td>
+<td>&gt;6:16</td>
+<td>&gt;4:53</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 10000000 / (double)((int)sqrt(step * 1000) % 10000000 + 1);</code></td>
+<td>&gt;6:42</td>
+<td>&gt;1:30:07</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>return 5000000 * (sin(step / 10000.0) + 1);</code></td>
+<td>&gt;6:59</td>
+<td>&gt;6:18</td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Eternity log #4</title>
+<link rel="stylesheet" href="style.css" media="all" />
+</head>
+
+<body>
+
+<h1>Eternity log #4</h1>
+
+
+<table>
+<tr><td><b>Datum:</b></td>
+<td>
+20. - 22. 2. 2009<br />
+28. - 30. 3. 2009 (<i>large MiniSat</i>, <i>larger</i>)
+</td>
+</tr>
+<tr>
+<td><b>Hrací plocha:</b></td>
+<td>
+3&times;3&times;3 (<i>smaller</i>) <a href="files/004-smaller.area">vstup</a> <a href="files/004-smaller_orig.area">originál</a> &amp; 
+4&times;4&times;4 (<i>small</i>) <a href="files/004-small.area">vstup</a> <a href="files/004-small_orig.area">originál</a> &amp; <br />
+5&times;5&times;5 (<i>medium</i>) <a href="files/004-medium.area">vstup</a> <a href="files/004-medium_orig.area">originál</a> &amp; 
+6&times;6&times;6 (<i>large</i>) <a href="files/004-large.area">vstup</a> <a href="files/004-large_orig.area">originál</a> &amp; <br />
+7&times;7&times;7 (<i>larger</i>) <a href="files/004-larger.area">vstup</a> <a href="files/004-larger_orig.area">originál</a> &amp;
+16&times;16&times;22 (<i>original</i>) <a href="files/004-original.area">vstup</a> <a href="files/004-original_orig.area">originál</a>
+</td>
+</tr>
+<tr><td><b>Stroj:</b></td>
+<td>
+AMD Athlon 64 X2 1.00 GB RAM Ubuntu 8.04<br />
+AMD Athlon 64 X2 1.00 GB RAM Windows XP/Cygwin (<i>large MiniSat</i>, <i>larger</i>)
+</td>
+</tr>
+<tr><td><b>Popis:</b></td>
+<td>
+Porovnání různých SAT solverů pro různé plochy (čas je časem celé režie řešení).<br />
+Počty CNF proměnných a klauzulí jsou pro danou plochu vždy stejné.<br />
+&gt; - čas větší než... - nedokončeno
+</td>
+</tr>
+</table>
+
+
+<table>
+
+<caption>Výsledky</caption>
+
+<tr>
+<th>Plocha</th>
+<th>SAT solver</th>
+<th>Čas (time real)</th>
+<th>CNF proměnných</th>
+<th>CNF klauzulí</th>
+</tr>
+
+<tr>
+<td>smaller</td>
+<td>Simplify</td>
+<td>0:18</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>MiniSat</td>
+<td>0:01</td>
+<td>2014</td>
+<td>6470</td>
+</tr>
+
+<tr>
+<td></td>
+<td>Spear</td>
+<td>0:01</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>zChaff</td>
+<td>0:01</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>small</td>
+<td>Simplify</td>
+<td>&gt;4:08:59</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>MiniSat</td>
+<td>0:01</td>
+<td>5905</td>
+<td>19442</td>
+</tr>
+
+<tr>
+<td></td>
+<td>Spear</td>
+<td>0:01</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>zChaff</td>
+<td>0:01</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>medium</td>
+<td>MiniSat</td>
+<td>0:17</td>
+<td>14966</td>
+<td>49002</td>
+</tr>
+
+<tr>
+<td></td>
+<td>Spear</td>
+<td>0:45</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>zChaff</td>
+<td>9:45</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>large</td>
+<td>MiniSat</td>
+<td>4:25:11</td>
+<td>29845</td>
+<td>98822</td>
+</tr>
+
+<tr>
+<td></td>
+<td>Spear</td>
+<td>&gt;4:04:59</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>zChaff</td>
+<td>&gt;4:04:59</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>larger</td>
+<td>MiniSat</td>
+<td>&gt;24:24:11</td>
+<td>55966</td>
+<td>184970</td>
+</tr>
+
+<tr>
+<td>original</td>
+<td></td>
+<td></td>
+<td>1406593</td>
+<td>4758146</td>
+</tr>
+
+</table>
+
+
+</body>
+</html>
