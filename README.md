@@ -13,3 +13,6 @@ The thesis is concerned with an attempt to find different approaches to solve th
 [Thesis](https://garncarz.github.io/eternity/bakalarka.pdf) (only in Czech)
 
 [Presentation](https://garncarz.github.io/eternity/prezentace.pdf) (only in Czech)
+
+
+<!-- ❄️ Hello to the GitHub Archive! ❄️ -->
