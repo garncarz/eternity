@@ -1,4 +1,10 @@
 *.area
+*.jar
+*.png
+*.txt
 
+.ipynb_checkpoints/
 bin/eternity
+download/
+programs/
 tmp/

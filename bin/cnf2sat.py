@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
 # cnf2sat.py
 # prevede CNF zapis vysledku do Simplify SAT zapisu
@@ -50,8 +50,8 @@ for line in input:
       continue
     # zapis prekladu do outputu
     output.write(translation[var])
-  
-  
+
+
 input.close()
 output.close()
 

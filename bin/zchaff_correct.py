@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
 # zchaff_correct.py
 # upravi CNF vysledek z programu Z-Chaff do spravneho formatu
@@ -13,7 +13,7 @@ import sys # pro argumenty a exit
 try:
   filename = sys.argv[1]
 except:
-  print "pouziti: zchaff_correct.py <filename>" 
+  print "pouziti: zchaff_correct.py <filename>"
   sys.exit(1)
 
 print "zchaff_correct"

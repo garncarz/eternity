@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
 # minisat_correct.py
 # upravi CNF vysledek z programu MiniSat do spravneho formatu
@@ -13,7 +13,7 @@ import sys # pro argumenty a exit
 try:
   filename = sys.argv[1]
 except:
-  print "pouziti: minisat_correct.py <filename>" 
+  print "pouziti: minisat_correct.py <filename>"
   sys.exit(1)
 
 print "minisat_correct"

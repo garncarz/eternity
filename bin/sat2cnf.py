@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
 # sat2cnf.py
 # prevede Simplify SAT zapis do CNF zapisu
@@ -68,17 +68,17 @@ def cnf_print(string):
 class Node:
   def __init__(self):
     self.children = []
-  
+
   def setOperator(self, operator):
     self.operator = operator
 
   def getOperator(self):
     return self.operator
-  
+
   # jmeno promenne ci mezi-promenne
   def setName(self, name):
     self.name = name
-  
+
   # jmeno promenne ci mezi-promenne
   def getName(self):
     # do jmena zahrneme i pripadnou negaci
@@ -94,13 +94,13 @@ class Node:
       return str(self.name)
     else:
       return "-" + str(self.name)
-  
+
   def addChild(self, child):
     self.children.append(child)
-  
+
   def getChildren(self):
     return self.children
-  
+
   # vypisuje hierarchii na std. vystup (pro kontrolu)
   def write(self, depth):
     # odsazeni podle hloubky zanoreni
@@ -156,17 +156,17 @@ class Content:
 
   def startswith(self, char):
     return self.string.startswith(char)
-  
+
   def find(self, char):
     return self.string.find(char)
-  
+
   # vrati zacatek aktualniho obsahu
   def preview(self):
     return self.string[:20]
-  
+
   def get(self):
     return self.string
-  
+
   # oseka (zepredu) obsah a v pripade potreby (kratke delky) jej doplni
   # ze souboru
   def shorten(self, offset):
@@ -177,7 +177,7 @@ class Content:
         break
       self.string = self.string + line.lower()
       self.string = self.string.replace("\n", "").replace("\r", "")
-  
+
   # uzavre soubor
   def close(self):
     self.input.close()
@@ -189,19 +189,19 @@ def findChildren(node, neg):
   global content
   # osekani mezer ze stran obsahu
   content.shorten(0)
-  
+
   # jiz neni dalsi dite
   if content.startswith(")"):
     return 0
-  
+
   # novy operator
   elif content.startswith("("):
     content.shorten(1) # osekani
-    
+
     # budeme vytvaret ve strukture formule novou mezipromennou?
     # (ano pri AND nebo OR)
     newVar = False
-    
+
     # zpracovani typu operatoru
     if content.startswith("and"):
       # zarizeni se podle negace
@@ -241,13 +241,13 @@ def findChildren(node, neg):
           node.addChild(child)
         else:
           break
-    
-    # osekani uzaviraci zavorky    
+
+    # osekani uzaviraci zavorky
     end = content.find(")")
     if end == -1:
       raise Exception("chybne zavorkovani: " + content.preview())
     content.shorten(end + 1)
-  
+
   # promenna
   else:
     # nalezeni konce promenne
@@ -257,7 +257,7 @@ def findChildren(node, neg):
       space = end
     if space == -1:
       raise Exception("chybne zavorkovani: " + content.preview())
-    
+
     # ulozeni udaju do uzlu a osekani obsahu
     if neg == False:  # je promenna negovana, ci ne?
       node.setOperator("var")
@@ -266,8 +266,8 @@ def findChildren(node, neg):
     variable = content.get()[:space]
     node.setName(translate(variable))
     content.shorten(space)
-  
-  # hledani potomku ok  
+
+  # hledani potomku ok
   return 1
 
 
@@ -276,7 +276,7 @@ try:
   input_filename = sys.argv[1]
   output_filename = sys.argv[2]
 except:
-  print "pouziti: sat2cnf.py <input_file> <output_file>" 
+  print "pouziti: sat2cnf.py <input_file> <output_file>"
   sys.exit(1)
 
 print "sat2cnf... findChildren(root)"
@@ -296,7 +296,7 @@ trans_file = open("cnf_translation.txt", "w")
 # obsah souboru se SAT zapisem
 content = Content(input_filename)
 
-# korenovy uzel a jeho nalezeni  
+# korenovy uzel a jeho nalezeni
 root = Node()
 if findChildren(root, False) == 0:
   raise Exception("chybne definovany root")
